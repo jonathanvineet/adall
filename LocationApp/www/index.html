@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Location</title>
+    <style>
+        body{font-family:Arial;text-align:center;padding:40px;background:#f4f8ff;}
+        h2{color:#1A73E8;} #info{margin-top:20px;font-size:18px;line-height:2;}
+        button{padding:12px 28px;font-size:16px;background:#1A73E8;
+               color:white;border:none;border-radius:8px;cursor:pointer;}
+        a{color:#1A73E8;}
+    </style>
+</head>
+<body>
+    <h2>📍 Current Location</h2>
+    <button onclick="getLocation()">Get My Location</button>
+    <div id="info">Press the button to find your location.</div>
+    <script src="cordova.js"></script>
+    <script>
+    function getLocation(){
+        document.getElementById("info").innerHTML = "Fetching location...";
+        navigator.geolocation.getCurrentPosition(
+            function(pos){
+                var lat = pos.coords.latitude.toFixed(6);
+                var lng = pos.coords.longitude.toFixed(6);
+                var acc = pos.coords.accuracy.toFixed(1);
+                document.getElementById("info").innerHTML =
+                    "<b>Latitude:</b> "+lat+"<br>"+
+                    "<b>Longitude:</b> "+lng+"<br>"+
+                    "<b>Accuracy:</b> "+acc+" m<br><br>"+
+                    "<a href='https://maps.google.com/?q="+lat+","+lng+"' target='_blank'>Open in Google Maps</a>";
+            },
+            function(err){ document.getElementById("info").innerHTML="Error: "+err.message; },
+            {enableHighAccuracy:true, timeout:10000}
+        );
+    }
+    </script>
+</body>
+</html>

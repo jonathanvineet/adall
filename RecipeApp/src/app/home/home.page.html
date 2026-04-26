@@ -1,0 +1,33 @@
+<ion-header><ion-toolbar color="primary">
+  <ion-title>🍳 Recipe Suggester</ion-title>
+</ion-toolbar></ion-header>
+
+
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-label position="floating">Enter Ingredients (comma separated)</ion-label>
+    <ion-input [(ngModel)]="ingredients" placeholder="e.g. egg, rice, tomato"></ion-input>
+  </ion-item>
+  <ion-button expand="block" (click)="findRecipes()" style="margin-top:12px">
+    Find Recipes
+  </ion-button>
+
+
+  <ion-list *ngIf="recipes.length > 0">
+    <ion-list-header><ion-label>Suggested Recipes</ion-label></ion-list-header>
+    <ion-card *ngFor="let r of recipes">
+      <ion-card-header>
+        <ion-card-title>{{ r.name }}</ion-card-title>
+        <ion-card-subtitle>{{ r.nutrition }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <b>Instructions:</b><br>{{ r.instructions }}
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+
+
+  <p *ngIf="noMatch" style="text-align:center;color:gray">
+    No recipe found. Try: egg, rice, tomato, pasta, or chicken.
+  </p>
+</ion-content>
