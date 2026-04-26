@@ -1,0 +1,1649 @@
+1
+2 ================================================================
+3 ALL 13 ANDROID STUDIO PROGRAMS — XML + JAVA CODE
+4 ================================================================
+5
+6 ================================================================
+7 1. BOOKSTORE STUDENT REGISTRATION
+8 ================================================================
+9
+10 --- activity_main.xml ---
+11
+12 <?xml version="1.0" encoding="utf-8"?>
+13 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+14 android:layout_width="match_parent"
+15 android:layout_height="match_parent"
+16 android:padding="16dp"
+17 android:background="#F5F5F5">
+18
+19 <LinearLayout
+20 android:layout_width="match_parent"
+21 android:layout_height="wrap_content"
+22 android:orientation="vertical">
+23
+24 <TextView android:text="Bookstore Registration"
+25 android:textSize="22sp" android:textStyle="bold"
+26 android:textColor="#1565C0"
+27 android:layout_marginBottom="16dp"
+28 android:layout_width="wrap_content"
+29 android:layout_height="wrap_content"/>
+30
+31 <EditText android:id="@+id/etName" android:hint="Full Name"
+32 android:layout_width="match_parent" android:layout_height="wrap_content"
+33 android:inputType="textPersonName" android:layout_marginBottom="10dp"/>
+34
+35 <EditText android:id="@+id/etStudentId" android:hint="Student ID"
+36 android:layout_width="match_parent" android:layout_height="wrap_content"
+37 android:layout_marginBottom="10dp"/>
+38
+39 <EditText android:id="@+id/etEmail" android:hint="Email"
+40 android:layout_width="match_parent" android:layout_height="wrap_content"
+41 android:inputType="textEmailAddress" android:layout_marginBottom="10dp"/>
+42
+43 <EditText android:id="@+id/etPhone" android:hint="Phone Number"
+44 android:layout_width="match_parent" android:layout_height="wrap_content"
+45 android:inputType="phone" android:layout_marginBottom="16dp"/>
+46
+47 <TextView android:text="Book Details" android:textSize="16sp"
+48 android:textStyle="bold" android:textColor="#1565C0"
+49 android:layout_width="wrap_content" android:layout_height="wrap_content"
+50 android:layout_marginBottom="8dp"/>
+51
+52 <EditText android:id="@+id/etBookTitle" android:hint="Book Title"
+53 android:layout_width="match_parent" android:layout_height="wrap_content"
+54 android:layout_marginBottom="10dp"/>
+55
+56 <EditText android:id="@+id/etAuthor" android:hint="Author"
+57 android:layout_width="match_parent" android:layout_height="wrap_content"
+58 android:layout_marginBottom="10dp"/>
+59
+60 <Spinner android:id="@+id/spinnerDept"
+61 android:layout_width="match_parent" android:layout_height="wrap_content"
+62 android:layout_marginBottom="10dp"/>
+63
+64 <EditText android:id="@+id/etQty" android:hint="Quantity"
+65 android:layout_width="match_parent" android:layout_height="wrap_content"
+66 android:inputType="number" android:layout_marginBottom="16dp"/>
+67
+68 <Button android:id="@+id/btnRegister" android:text="Register Book"
+69 android:layout_width="match_parent" android:layout_height="wrap_content"
+70 android:backgroundTint="#1565C0"/>
+71
+72 <Button android:id="@+id/btnReset" android:text="Reset"
+73 android:layout_width="match_parent" android:layout_height="wrap_content"
+74 android:layout_marginTop="8dp" android:backgroundTint="#757575"/>
+75
+76 </LinearLayout>
+77 </ScrollView>
+78
+79 --- MainActivity.java ---
+80
+81 package com.example.bookstore;
+82
+83 import android.os.Bundle;
+84 import android.view.View;
+85 import android.widget.*;
+86 import androidx.appcompat.app.AppCompatActivity;
+87
+88 public class MainActivity extends AppCompatActivity {
+89
+90 EditText etName, etStudentId, etEmail, etPhone, etBookTitle, etAuthor, etQty;
+91 Spinner spinnerDept;
+92 Button btnRegister, btnReset;
+93 String[] departments = {"Computer Science","Electronics","Mechanical","Civil","IT"};
+94
+95 @Override
+96 protected void onCreate(Bundle savedInstanceState) {
+97 super.onCreate(savedInstanceState);
+98 setContentView(R.layout.activity_main);
+99
+100 etName = findViewById(R.id.etName);
+101 etStudentId = findViewById(R.id.etStudentId);
+102 etEmail = findViewById(R.id.etEmail);
+103 etPhone = findViewById(R.id.etPhone);
+104 etBookTitle = findViewById(R.id.etBookTitle);
+105 etAuthor = findViewById(R.id.etAuthor);
+106 etQty = findViewById(R.id.etQty);
+107 spinnerDept = findViewById(R.id.spinnerDept);
+108 btnRegister = findViewById(R.id.btnRegister);
+109 btnReset = findViewById(R.id.btnReset);
+110
+111 ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+112 android.R.layout.simple_spinner_item, departments);
+113 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+114 spinnerDept.setAdapter(adapter);
+115
+116 btnRegister.setOnClickListener(v -> {
+117 String name = etName.getText().toString().trim();
+118 String id = etStudentId.getText().toString().trim();
+119 String email = etEmail.getText().toString().trim();
+120 String book = etBookTitle.getText().toString().trim();
+121 if (name.isEmpty() || id.isEmpty() || email.isEmpty() || book.isEmpty()) {
+122 Toast.makeText(this, "Please fill all required fields", Toast.LENGTH_SHORT).show();
+123 } else {
+124 Toast.makeText(this, "Book registered successfully for " + name, Toast.LENGTH_LONG).show();
+125 }
+126 });
+127
+128 btnReset.setOnClickListener(v -> {
+129 etName.setText(""); etStudentId.setText(""); etEmail.setText("");
+130 etPhone.setText(""); etBookTitle.setText(""); etAuthor.setText("");
+131 etQty.setText(""); spinnerDept.setSelection(0);
+132 });
+133 }
+134 }
+135
+136
+137 ================================================================
+138 2. STUDENT COURSE REGISTRATION
+139 ================================================================
+140
+141 --- activity_main.xml ---
+142
+143 <?xml version="1.0" encoding="utf-8"?>
+144 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+145 android:layout_width="match_parent" android:layout_height="match_parent"
+146 android:padding="16dp">
+147
+148 <LinearLayout android:layout_width="match_parent"
+149 android:layout_height="wrap_content" android:orientation="vertical">
+150
+151 <TextView android:text="Course Registration"
+152 android:textSize="22sp" android:textStyle="bold"
+153 android:textColor="#1565C0" android:layout_marginBottom="16dp"
+154 android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+155
+156 <EditText android:id="@+id/etStudentName" android:hint="Student Name"
+157 android:layout_width="match_parent" android:layout_height="wrap_content"
+158 android:layout_marginBottom="10dp"/>
+159
+160 <EditText android:id="@+id/etRegNo" android:hint="Register Number"
+161 android:layout_width="match_parent" android:layout_height="wrap_content"
+162 android:layout_marginBottom="10dp"/>
+163
+164 <Spinner android:id="@+id/spinnerSem"
+165 android:layout_width="match_parent" android:layout_height="wrap_content"
+166 android:layout_marginBottom="16dp"/>
+167
+168 <TextView android:text="Select Courses:" android:textSize="16sp"
+169 android:textStyle="bold" android:layout_width="wrap_content"
+170 android:layout_height="wrap_content" android:layout_marginBottom="8dp"/>
+171
+172 <CheckBox android:id="@+id/cb1" android:text="CS301 - Data Structures (4 Credits)"
+173 android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+174 <CheckBox android:id="@+id/cb2" android:text="CS302 - Algorithms (3 Credits)"
+175 android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+176 <CheckBox android:id="@+id/cb3" android:text="CS303 - DBMS (3 Credits)"
+177 android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+178 <CheckBox android:id="@+id/cb4" android:text="CS304 - Operating Systems (4 Credits)"
+179 android:layout_width="wrap_content" android:layout_height="wrap_content"
+180 android:layout_marginBottom="16dp"/>
+181
+182 <Button android:id="@+id/btnSubmit" android:text="Submit Registration"
+183 android:layout_width="match_parent" android:layout_height="wrap_content"
+184 android:backgroundTint="#1565C0"/>
+185
+186 <TextView android:id="@+id/tvResult" android:layout_width="match_parent"
+187 android:layout_height="wrap_content" android:layout_marginTop="12dp"
+188 android:textSize="14sp" android:textColor="#333"/>
+189
+190 </LinearLayout>
+191 </ScrollView>
+192
+193 --- MainActivity.java ---
+194
+195 package com.example.coursereg;
+196
+197 import android.os.Bundle;
+198 import android.widget.*;
+199 import androidx.appcompat.app.AppCompatActivity;
+200
+201 public class MainActivity extends AppCompatActivity {
+202
+203 EditText etStudentName, etRegNo;
+204 Spinner spinnerSem;
+205 CheckBox cb1, cb2, cb3, cb4;
+206 Button btnSubmit;
+207 TextView tvResult;
+208 String[] semesters = {"Semester 1","Semester 2","Semester 3","Semester 4","Semester 5","Semester 6"};
+209
+210 @Override
+211 protected void onCreate(Bundle savedInstanceState) {
+212 super.onCreate(savedInstanceState);
+213 setContentView(R.layout.activity_main);
+214
+215 etStudentName = findViewById(R.id.etStudentName);
+216 etRegNo = findViewById(R.id.etRegNo);
+217 spinnerSem = findViewById(R.id.spinnerSem);
+218 cb1 = findViewById(R.id.cb1);
+219 cb2 = findViewById(R.id.cb2);
+220 cb3 = findViewById(R.id.cb3);
+221 cb4 = findViewById(R.id.cb4);
+222 btnSubmit = findViewById(R.id.btnSubmit);
+223 tvResult = findViewById(R.id.tvResult);
+224
+225 ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+226 android.R.layout.simple_spinner_item, semesters);
+227 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+228 spinnerSem.setAdapter(adapter);
+229
+230 btnSubmit.setOnClickListener(v -> {
+231 String name = etStudentName.getText().toString().trim();
+232 String reg = etRegNo.getText().toString().trim();
+233 if (name.isEmpty() || reg.isEmpty()) {
+234 Toast.makeText(this, "Fill student details", Toast.LENGTH_SHORT).show();
+235 return;
+236 }
+237 StringBuilder selected = new StringBuilder("Registered Courses:\n");
+238 int credits = 0;
+239 if (cb1.isChecked()) { selected.append("- Data Structures\n"); credits += 4; }
+240 if (cb2.isChecked()) { selected.append("- Algorithms\n"); credits += 3; }
+241 if (cb3.isChecked()) { selected.append("- DBMS\n"); credits += 3; }
+242 if (cb4.isChecked()) { selected.append("- Operating Systems\n"); credits += 4; }
+243 if (credits == 0) {
+244 Toast.makeText(this, "Select at least one course", Toast.LENGTH_SHORT).show();
+245 return;
+246 }
+247 selected.append("Total Credits: ").append(credits);
+248 tvResult.setText(selected.toString());
+249 Toast.makeText(this, "Registration successful!", Toast.LENGTH_SHORT).show();
+250 });
+251 }
+252 }
+253
+254
+255 ================================================================
+256 3. STUDENT TICKET BOOKING
+257 ================================================================
+258
+259 --- activity_main.xml ---
+260
+261 <?xml version="1.0" encoding="utf-8"?>
+262 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+263 android:layout_width="match_parent" android:layout_height="match_parent"
+264 android:padding="16dp">
+265
+266 <LinearLayout android:layout_width="match_parent"
+267 android:layout_height="wrap_content" android:orientation="vertical">
+268
+269 <TextView android:text="Ticket Booking"
+270 android:textSize="22sp" android:textStyle="bold"
+271 android:textColor="#1565C0" android:layout_marginBottom="16dp"
+272 android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+273
+274 <EditText android:id="@+id/etPassName" android:hint="Passenger Name"
+275 android:layout_width="match_parent" android:layout_height="wrap_content"
+276 android:layout_marginBottom="10dp"/>
+277
+278 <EditText android:id="@+id/etStudId" android:hint="Student ID"
+279 android:layout_width="match_parent" android:layout_height="wrap_content"
+280 android:layout_marginBottom="10dp"/>
+281
+282 <EditText android:id="@+id/etFrom" android:hint="From (Origin)"
+283 android:layout_width="match_parent" android:layout_height="wrap_content"
+284 android:layout_marginBottom="10dp"/>
+285
+286 <EditText android:id="@+id/etTo" android:hint="To (Destination)"
+287 android:layout_width="match_parent" android:layout_height="wrap_content"
+288 android:layout_marginBottom="10dp"/>
+289
+290 <EditText android:id="@+id/etDate" android:hint="Travel Date (DD/MM/YYYY)"
+291 android:layout_width="match_parent" android:layout_height="wrap_content"
+292 android:layout_marginBottom="10dp"/>
+293
+294 <TextView android:text="Seat Class:" android:layout_width="wrap_content"
+295 android:layout_height="wrap_content"/>
+296 <Spinner android:id="@+id/spinnerClass"
+297 android:layout_width="match_parent" android:layout_height="wrap_content"
+298 android:layout_marginBottom="10dp"/>
+299
+300 <EditText android:id="@+id/etTickets" android:hint="Number of Tickets"
+301 android:layout_width="match_parent" android:layout_height="wrap_content"
+302 android:inputType="number" android:layout_marginBottom="16dp"/>
+303
+304 <Button android:id="@+id/btnBook" android:text="Book Ticket"
+305 android:layout_width="match_parent" android:layout_height="wrap_content"
+306 android:backgroundTint="#1565C0"/>
+307
+308 <TextView android:id="@+id/tvBookingResult" android:layout_width="match_parent"
+309 android:layout_height="wrap_content" android:layout_marginTop="12dp"
+310 android:textSize="14sp" android:padding="10dp"/>
+311
+312 </LinearLayout>
+313 </ScrollView>
+314
+315 --- MainActivity.java ---
+316
+317 package com.example.ticketbooking;
+318
+319 import android.os.Bundle;
+320 import android.widget.*;
+321 import androidx.appcompat.app.AppCompatActivity;
+322
+323 public class MainActivity extends AppCompatActivity {
+324
+325 EditText etPassName, etStudId, etFrom, etTo, etDate, etTickets;
+326 Spinner spinnerClass;
+327 Button btnBook;
+328 TextView tvBookingResult;
+329 String[] seatClasses = {"General - ₹50","Sleeper - ₹120","AC 3-Tier - ₹350","AC 2-Tier - ₹550"};
+330 int[] prices = {50, 120, 350, 550};
+331
+332 @Override
+333 protected void onCreate(Bundle savedInstanceState) {
+334 super.onCreate(savedInstanceState);
+335 setContentView(R.layout.activity_main);
+336
+337 etPassName = findViewById(R.id.etPassName);
+338 etStudId = findViewById(R.id.etStudId);
+339 etFrom = findViewById(R.id.etFrom);
+340 etTo = findViewById(R.id.etTo);
+341 etDate = findViewById(R.id.etDate);
+342 etTickets = findViewById(R.id.etTickets);
+343 spinnerClass = findViewById(R.id.spinnerClass);
+344 btnBook = findViewById(R.id.btnBook);
+345 tvBookingResult = findViewById(R.id.tvBookingResult);
+346
+347 ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+348 android.R.layout.simple_spinner_item, seatClasses);
+349 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+350 spinnerClass.setAdapter(adapter);
+351
+352 btnBook.setOnClickListener(v -> {
+353 String name = etPassName.getText().toString().trim();
+354 String from = etFrom.getText().toString().trim();
+355 String to = etTo.getText().toString().trim();
+356 String date = etDate.getText().toString().trim();
+357 String ticketStr = etTickets.getText().toString().trim();
+358
+359 if (name.isEmpty() || from.isEmpty() || to.isEmpty() || date.isEmpty() || ticketStr.isEmpty()) {
+360 Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+361 return;
+362 }
+363 int n = Integer.parseInt(ticketStr);
+364 int idx = spinnerClass.getSelectedItemPosition();
+365 int total = n * prices[idx];
+366
+367 tvBookingResult.setText(
+368 "=== BOOKING CONFIRMED ===\n" +
+369 "Passenger: " + name + "\n" +
+370 "Route: " + from + " → " + to + "\n" +
+371 "Date: " + date + "\n" +
+372 "Class: " + seatClasses[idx] + "\n" +
+373 "Tickets: " + n + "\n" +
+374 "Total Amount: ₹" + total
+375 );
+376 });
+377 }
+378 }
+379
+380
+381 ================================================================
+382 4. STUDENT REGISTRATION (with SQLite Database)
+383 ================================================================
+384
+385 --- activity_main.xml ---
+386
+387 <?xml version="1.0" encoding="utf-8"?>
+388 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+389 android:layout_width="match_parent" android:layout_height="match_parent"
+390 android:padding="16dp">
+391
+392 <LinearLayout android:layout_width="match_parent"
+393 android:layout_height="wrap_content" android:orientation="vertical">
+394
+395 <TextView android:text="Student Registration"
+396 android:textSize="22sp" android:textStyle="bold"
+397 android:textColor="#1565C0" android:layout_marginBottom="16dp"
+398 android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+399
+400 <EditText android:id="@+id/etFirstName" android:hint="First Name"
+401 android:layout_width="match_parent" android:layout_height="wrap_content"
+402 android:layout_marginBottom="10dp"/>
+403 <EditText android:id="@+id/etLastName" android:hint="Last Name"
+404 android:layout_width="match_parent" android:layout_height="wrap_content"
+405 android:layout_marginBottom="10dp"/>
+406 <EditText android:id="@+id/etDOB" android:hint="Date of Birth (DD/MM/YYYY)"
+407 android:layout_width="match_parent" android:layout_height="wrap_content"
+408 android:layout_marginBottom="10dp"/>
+409
+410 <TextView android:text="Gender:" android:layout_width="wrap_content"
+411 android:layout_height="wrap_content"/>
+412 <RadioGroup android:id="@+id/rgGender" android:orientation="horizontal"
+413 android:layout_width="wrap_content" android:layout_height="wrap_content"
+414 android:layout_marginBottom="10dp">
+415 <RadioButton android:id="@+id/rbMale" android:text="Male"/>
+416 <RadioButton android:id="@+id/rbFemale" android:text="Female"/>
+417 <RadioButton android:id="@+id/rbOther" android:text="Other"/>
+418 </RadioGroup>
+419
+420 <Spinner android:id="@+id/spinnerYear"
+421 android:layout_width="match_parent" android:layout_height="wrap_content"
+422 android:layout_marginBottom="10dp"/>
+423 <Spinner android:id="@+id/spinnerDept"
+424 android:layout_width="match_parent" android:layout_height="wrap_content"
+425 android:layout_marginBottom="10dp"/>
+426
+427 <EditText android:id="@+id/etAddress" android:hint="Address"
+428 android:layout_width="match_parent" android:layout_height="wrap_content"
+429 android:minLines="2" android:layout_marginBottom="10dp"/>
+430 <EditText android:id="@+id/etEmail" android:hint="Email"
+431 android:layout_width="match_parent" android:layout_height="wrap_content"
+432 android:inputType="textEmailAddress" android:layout_marginBottom="10dp"/>
+433 <EditText android:id="@+id/etPhone" android:hint="Phone"
+434 android:layout_width="match_parent" android:layout_height="wrap_content"
+435 android:inputType="phone" android:layout_marginBottom="16dp"/>
+436
+437 <Button android:id="@+id/btnRegister" android:text="Register"
+438 android:layout_width="match_parent" android:layout_height="wrap_content"
+439 android:backgroundTint="#1565C0"/>
+440 <Button android:id="@+id/btnClear" android:text="Clear"
+441 android:layout_width="match_parent" android:layout_height="wrap_content"
+442 android:layout_marginTop="8dp" android:backgroundTint="#757575"/>
+443
+444 </LinearLayout>
+445 </ScrollView>
+446
+447 --- DatabaseHelper.java ---
+448
+449 package com.example.studreg;
+450
+451 import android.content.Context;
+452 import android.database.sqlite.*;
+453
+454 public class DatabaseHelper extends SQLiteOpenHelper {
+455 public DatabaseHelper(Context context) {
+456 super(context, "StudentDB", null, 1);
+457 }
+458 @Override
+459 public void onCreate(SQLiteDatabase db) {
+460 db.execSQL("CREATE TABLE students (" +
+461 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+462 "first_name TEXT, last_name TEXT, dob TEXT," +
+463 "gender TEXT, year TEXT, dept TEXT," +
+464 "address TEXT, email TEXT, phone TEXT)");
+465 }
+466 @Override
+467 public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+468 db.execSQL("DROP TABLE IF EXISTS students");
+469 onCreate(db);
+470 }
+471 }
+472
+473 --- MainActivity.java ---
+474
+475 package com.example.studreg;
+476
+477 import android.content.ContentValues;
+478 import android.database.sqlite.SQLiteDatabase;
+479 import android.os.Bundle;
+480 import android.widget.*;
+481 import androidx.appcompat.app.AppCompatActivity;
+482
+483 public class MainActivity extends AppCompatActivity {
+484
+485 EditText etFirstName, etLastName, etDOB, etAddress, etEmail, etPhone;
+486 RadioGroup rgGender;
+487 Spinner spinnerYear, spinnerDept;
+488 Button btnRegister, btnClear;
+489 DatabaseHelper dbHelper;
+490
+491 String[] years = {"1st Year","2nd Year","3rd Year","4th Year"};
+492 String[] depts = {"Computer Science","Electronics","Mechanical","Civil","IT"};
+493
+494 @Override
+495 protected void onCreate(Bundle savedInstanceState) {
+496 super.onCreate(savedInstanceState);
+497 setContentView(R.layout.activity_main);
+498
+499 dbHelper = new DatabaseHelper(this);
+500
+501 etFirstName = findViewById(R.id.etFirstName);
+502 etLastName = findViewById(R.id.etLastName);
+503 etDOB = findViewById(R.id.etDOB);
+504 etAddress = findViewById(R.id.etAddress);
+505 etEmail = findViewById(R.id.etEmail);
+506 etPhone = findViewById(R.id.etPhone);
+507 rgGender = findViewById(R.id.rgGender);
+508 spinnerYear = findViewById(R.id.spinnerYear);
+509 spinnerDept = findViewById(R.id.spinnerDept);
+510 btnRegister = findViewById(R.id.btnRegister);
+511 btnClear = findViewById(R.id.btnClear);
+512
+513 spinnerYear.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, years));
+514 spinnerDept.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, depts));
+515
+516 btnRegister.setOnClickListener(v -> {
+517 String firstName = etFirstName.getText().toString().trim();
+518 String lastName = etLastName.getText().toString().trim();
+519 if (firstName.isEmpty() || lastName.isEmpty()) {
+520 Toast.makeText(this, "Enter name", Toast.LENGTH_SHORT).show(); return;
+521 }
+522 int genderId = rgGender.getCheckedRadioButtonId();
+523 String gender = genderId == R.id.rbMale ? "Male" : genderId == R.id.rbFemale ? "Female" : "Other";
+524
+525 SQLiteDatabase db = dbHelper.getWritableDatabase();
+526 ContentValues cv = new ContentValues();
+527 cv.put("first_name", firstName); cv.put("last_name", lastName);
+528 cv.put("dob", etDOB.getText().toString()); cv.put("gender", gender);
+529 cv.put("year", spinnerYear.getSelectedItem().toString());
+530 cv.put("dept", spinnerDept.getSelectedItem().toString());
+531 cv.put("address", etAddress.getText().toString());
+532 cv.put("email", etEmail.getText().toString());
+533 cv.put("phone", etPhone.getText().toString());
+534 long id = db.insert("students", null, cv);
+535 Toast.makeText(this, id > 0 ? "Student registered! ID: " + id : "Registration failed", Toast.LENGTH_LONG).show();
+536 });
+537
+538 btnClear.setOnClickListener(v -> {
+539 etFirstName.setText(""); etLastName.setText(""); etDOB.setText("");
+540 etAddress.setText(""); etEmail.setText(""); etPhone.setText("");
+541 rgGender.clearCheck(); spinnerYear.setSelection(0); spinnerDept.setSelection(0);
+542 });
+543 }
+544 }
+545
+546
+547 ================================================================
+548 5. LIBRARY SYSTEM WITH DATABASE (SQLite)
+549 ================================================================
+550
+551 --- activity_main.xml ---
+552
+553 <?xml version="1.0" encoding="utf-8"?>
+554 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+555 android:layout_width="match_parent" android:layout_height="match_parent"
+556 android:orientation="vertical" android:padding="16dp">
+557
+558 <TextView android:text="Library Management System"
+559 android:textSize="20sp" android:textStyle="bold" android:textColor="#1565C0"
+560 android:layout_width="wrap_content" android:layout_height="wrap_content"
+561 android:layout_marginBottom="12dp"/>
+562
+563 <EditText android:id="@+id/etSearch" android:hint="Search book by title..."
+564 android:layout_width="match_parent" android:layout_height="wrap_content"
+565 android:layout_marginBottom="8dp"/>
+566
+567 <Button android:id="@+id/btnSearch" android:text="Search"
+568 android:layout_width="match_parent" android:layout_height="wrap_content"
+569 android:backgroundTint="#1565C0" android:layout_marginBottom="8dp"/>
+570
+571 <EditText android:id="@+id/etTitle" android:hint="Book Title"
+572 android:layout_width="match_parent" android:layout_height="wrap_content"
+573 android:layout_marginBottom="8dp"/>
+574
+575 <EditText android:id="@+id/etAuthor" android:hint="Author"
+576 android:layout_width="match_parent" android:layout_height="wrap_content"
+577 android:layout_marginBottom="8dp"/>
+578
+579 <EditText android:id="@+id/etISBN" android:hint="ISBN"
+580 android:layout_width="match_parent" android:layout_height="wrap_content"
+581 android:layout_marginBottom="8dp"/>
+582
+583 <Button android:id="@+id/btnAdd" android:text="Add Book"
+584 android:layout_width="match_parent" android:layout_height="wrap_content"
+585 android:backgroundTint="#2E7D32" android:layout_marginBottom="8dp"/>
+586
+587 <Button android:id="@+id/btnIssue" android:text="Issue Book"
+588 android:layout_width="match_parent" android:layout_height="wrap_content"
+589 android:backgroundTint="#E65100" android:layout_marginBottom="8dp"/>
+590
+591 <Button android:id="@+id/btnReturn" android:text="Return Book"
+592 android:layout_width="match_parent" android:layout_height="wrap_content"
+593 android:backgroundTint="#6A1B9A" android:layout_marginBottom="8dp"/>
+594
+595 <ListView android:id="@+id/lvBooks"
+596 android:layout_width="match_parent" android:layout_height="0dp"
+597 android:layout_weight="1"/>
+598
+599 </LinearLayout>
+600
+601 --- LibraryDBHelper.java ---
+602
+603 package com.example.library;
+604
+605 import android.content.Context;
+606 import android.database.sqlite.*;
+607
+608 public class LibraryDBHelper extends SQLiteOpenHelper {
+609 public LibraryDBHelper(Context context) {
+610 super(context, "LibraryDB", null, 1);
+611 }
+612 @Override
+613 public void onCreate(SQLiteDatabase db) {
+614 db.execSQL("CREATE TABLE books (" +
+615 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+616 "title TEXT, author TEXT, isbn TEXT, status TEXT DEFAULT 'Available')");
+617 }
+618 @Override
+619 public void onUpgrade(SQLiteDatabase db, int o, int n) {
+620 db.execSQL("DROP TABLE IF EXISTS books"); onCreate(db);
+621 }
+622 }
+623
+624 --- MainActivity.java ---
+625
+626 package com.example.library;
+627
+628 import android.content.ContentValues;
+629 import android.database.*;
+630 import android.database.sqlite.SQLiteDatabase;
+631 import android.os.Bundle;
+632 import android.widget.*;
+633 import androidx.appcompat.app.AppCompatActivity;
+634 import java.util.ArrayList;
+635
+636 public class MainActivity extends AppCompatActivity {
+637
+638 EditText etSearch, etTitle, etAuthor, etISBN;
+639 Button btnSearch, btnAdd, btnIssue, btnReturn;
+640 ListView lvBooks;
+641 LibraryDBHelper dbHelper;
+642 ArrayAdapter<String> listAdapter;
+643 ArrayList<String> bookList = new ArrayList<>();
+644
+645 @Override
+646 protected void onCreate(Bundle savedInstanceState) {
+647 super.onCreate(savedInstanceState);
+648 setContentView(R.layout.activity_main);
+649
+650 dbHelper = new LibraryDBHelper(this);
+651 etSearch = findViewById(R.id.etSearch);
+652 etTitle = findViewById(R.id.etTitle);
+653 etAuthor = findViewById(R.id.etAuthor);
+654 etISBN = findViewById(R.id.etISBN);
+655 btnSearch = findViewById(R.id.btnSearch);
+656 btnAdd = findViewById(R.id.btnAdd);
+657 btnIssue = findViewById(R.id.btnIssue);
+658 btnReturn = findViewById(R.id.btnReturn);
+659 lvBooks = findViewById(R.id.lvBooks);
+660
+661 listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, bookList);
+662 lvBooks.setAdapter(listAdapter);
+663 loadBooks();
+664
+665 btnAdd.setOnClickListener(v -> {
+666 String title = etTitle.getText().toString().trim();
+667 String author = etAuthor.getText().toString().trim();
+668 String isbn = etISBN.getText().toString().trim();
+669 if (title.isEmpty()) { Toast.makeText(this,"Enter title",Toast.LENGTH_SHORT).show(); return; }
+670 SQLiteDatabase db = dbHelper.getWritableDatabase();
+671 ContentValues cv = new ContentValues();
+672 cv.put("title", title); cv.put("author", author); cv.put("isbn", isbn);
+673 db.insert("books", null, cv);
+674 Toast.makeText(this, "Book added!", Toast.LENGTH_SHORT).show();
+675 loadBooks();
+676 });
+677
+678 btnSearch.setOnClickListener(v -> {
+679 String q = etSearch.getText().toString().trim();
+680 bookList.clear();
+681 SQLiteDatabase db = dbHelper.getReadableDatabase();
+682 Cursor c = db.rawQuery("SELECT title,author,status FROM books WHERE title LIKE ?", new String[]{"%"+q+"%"});
+683 while (c.moveToNext()) bookList.add(c.getString(0)+" — "+c.getString(1)+" ["+c.getString(2)+"]");
+684 c.close(); listAdapter.notifyDataSetChanged();
+685 });
+686
+687 btnIssue.setOnClickListener(v -> updateStatus("Available","Issued"));
+688 btnReturn.setOnClickListener(v -> updateStatus("Issued","Available"));
+689 }
+690
+691 void loadBooks() {
+692 bookList.clear();
+693 SQLiteDatabase db = dbHelper.getReadableDatabase();
+694 Cursor c = db.rawQuery("SELECT title,author,status FROM books", null);
+695 while (c.moveToNext()) bookList.add(c.getString(0)+" — "+c.getString(1)+" ["+c.getString(2)+"]");
+696 c.close(); listAdapter.notifyDataSetChanged();
+697 }
+698
+699 void updateStatus(String from, String to) {
+700 String isbn = etISBN.getText().toString().trim();
+701 if (isbn.isEmpty()) { Toast.makeText(this,"Enter ISBN",Toast.LENGTH_SHORT).show(); return; }
+702 SQLiteDatabase db = dbHelper.getWritableDatabase();
+703 ContentValues cv = new ContentValues(); cv.put("status", to);
+704 int rows = db.update("books", cv, "isbn=? AND status=?", new String[]{isbn, from});
+705 Toast.makeText(this, rows > 0 ? "Book "+to+"!" : "Not found / already "+to, Toast.LENGTH_SHORT).show();
+706 loadBooks();
+707 }
+708 }
+709
+710
+711 ================================================================
+712 6. UI COMPONENTS DEMO
+713 ================================================================
+714
+715 --- activity_main.xml ---
+716
+717 <?xml version="1.0" encoding="utf-8"?>
+718 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+719 android:layout_width="match_parent" android:layout_height="match_parent"
+720 android:padding="16dp">
+721
+722 <LinearLayout android:layout_width="match_parent"
+723 android:layout_height="wrap_content" android:orientation="vertical">
+724
+725 <TextView android:text="UI Components Demo"
+726 android:textSize="22sp" android:textStyle="bold" android:textColor="#1565C0"
+727 android:layout_width="wrap_content" android:layout_height="wrap_content"
+728 android:layout_marginBottom="12dp"/>
+729
+730 <TextView android:text="EditText:" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+731 <EditText android:id="@+id/etDemo" android:hint="Type something..."
+732 android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="10dp"/>
+733
+734 <TextView android:text="Spinner:" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+735 <Spinner android:id="@+id/spinner" android:layout_width="match_parent"
+736 android:layout_height="wrap_content" android:layout_marginBottom="10dp"/>
+737
+738 <TextView android:text="CheckBox:" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+739 <CheckBox android:id="@+id/cbDemo" android:text="Accept Terms"
+740 android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="10dp"/>
+741
+742 <TextView android:text="RadioGroup:" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+743 <RadioGroup android:id="@+id/rg" android:orientation="horizontal"
+744 android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="10dp">
+745 <RadioButton android:id="@+id/rbA" android:text="Option A"/>
+746 <RadioButton android:id="@+id/rbB" android:text="Option B"/>
+747 </RadioGroup>
+748
+749 <TextView android:text="SeekBar:" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+750 <SeekBar android:id="@+id/seekBar" android:layout_width="match_parent"
+751 android:layout_height="wrap_content" android:max="100" android:layout_marginBottom="4dp"/>
+752 <TextView android:id="@+id/tvSeek" android:text="Value: 0"
+753 android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="10dp"/>
+754
+755 <TextView android:text="ProgressBar:" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+756 <ProgressBar android:id="@+id/progressBar" style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+757 android:layout_width="match_parent" android:layout_height="wrap_content"
+758 android:progress="60" android:max="100" android:layout_marginBottom="10dp"/>
+759
+760 <TextView android:text="RatingBar:" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+761 <RatingBar android:id="@+id/ratingBar" android:layout_width="wrap_content"
+762 android:layout_height="wrap_content" android:numStars="5" android:stepSize="1"
+763 android:rating="3" android:layout_marginBottom="16dp"/>
+764
+765 <Button android:id="@+id/btnShow" android:text="Show Toast"
+766 android:layout_width="match_parent" android:layout_height="wrap_content"
+767 android:backgroundTint="#1565C0"/>
+768
+769 <TextView android:id="@+id/tvOutput" android:layout_width="match_parent"
+770 android:layout_height="wrap_content" android:layout_marginTop="12dp"
+771 android:textSize="14sp" android:padding="10dp"
+772 android:background="#E3F2FD" android:textColor="#0D47A1"/>
+773
+774 </LinearLayout>
+775 </ScrollView>
+776
+777 --- MainActivity.java ---
+778
+779 package com.example.uidemo;
+780
+781 import android.os.Bundle;
+782 import android.widget.*;
+783 import androidx.appcompat.app.AppCompatActivity;
+784
+785 public class MainActivity extends AppCompatActivity {
+786
+787 EditText etDemo;
+788 Spinner spinner;
+789 CheckBox cbDemo;
+790 RadioGroup rg;
+791 SeekBar seekBar;
+792 ProgressBar progressBar;
+793 RatingBar ratingBar;
+794 Button btnShow;
+795 TextView tvSeek, tvOutput;
+796 String[] options = {"Option 1","Option 2","Option 3","Option 4"};
+797
+798 @Override
+799 protected void onCreate(Bundle savedInstanceState) {
+800 super.onCreate(savedInstanceState);
+801 setContentView(R.layout.activity_main);
+802
+803 etDemo = findViewById(R.id.etDemo);
+804 spinner = findViewById(R.id.spinner);
+805 cbDemo = findViewById(R.id.cbDemo);
+806 rg = findViewById(R.id.rg);
+807 seekBar = findViewById(R.id.seekBar);
+808 progressBar = findViewById(R.id.progressBar);
+809 ratingBar = findViewById(R.id.ratingBar);
+810 btnShow = findViewById(R.id.btnShow);
+811 tvSeek = findViewById(R.id.tvSeek);
+812 tvOutput = findViewById(R.id.tvOutput);
+813
+814 spinner.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, options));
+815
+816 seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+817 public void onProgressChanged(SeekBar sb, int p, boolean u) { tvSeek.setText("Value: " + p); progressBar.setProgress(p); }
+818 public void onStartTrackingTouch(SeekBar sb) {}
+819 public void onStopTrackingTouch(SeekBar sb) {}
+820 });
+821
+822 btnShow.setOnClickListener(v -> {
+823 int radioId = rg.getCheckedRadioButtonId();
+824 String radio = radioId == R.id.rbA ? "Option A" : radioId == R.id.rbB ? "Option B" : "None";
+825 String out = "Text: " + etDemo.getText() +
+826 "\nSpinner: " + spinner.getSelectedItem() +
+827 "\nCheckBox: " + cbDemo.isChecked() +
+828 "\nRadio: " + radio +
+829 "\nSeekBar: " + seekBar.getProgress() +
+830 "\nRating: " + ratingBar.getRating();
+831 tvOutput.setText(out);
+832 Toast.makeText(this, "Values captured!", Toast.LENGTH_SHORT).show();
+833 });
+834 }
+835 }
+836
+837
+838 ================================================================
+839 7. CALCULATOR APP
+840 ================================================================
+841
+842 --- activity_main.xml ---
+843
+844 <?xml version="1.0" encoding="utf-8"?>
+845 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+846 android:layout_width="match_parent" android:layout_height="match_parent"
+847 android:orientation="vertical" android:padding="16dp" android:gravity="bottom">
+848
+849 <TextView android:id="@+id/tvExpression" android:layout_width="match_parent"
+850 android:layout_height="wrap_content" android:textSize="16sp"
+851 android:textColor="#888" android:gravity="end" android:layout_marginBottom="4dp"/>
+852
+853 <TextView android:id="@+id/tvDisplay" android:layout_width="match_parent"
+854 android:layout_height="wrap_content" android:text="0"
+855 android:textSize="48sp" android:textStyle="bold"
+856 android:gravity="end" android:layout_marginBottom="16dp"/>
+857
+858 <GridLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+859 android:columnCount="4" android:rowCount="5" android:useDefaultMargins="true">
+860
+861 <Button android:id="@+id/btnAC" android:text="AC" android:backgroundTint="#A5A5A5"/>
+862 <Button android:id="@+id/btnPlusMinus" android:text="+/-" android:backgroundTint="#A5A5A5"/>
+863 <Button android:id="@+id/btnPercent" android:text="%" android:backgroundTint="#A5A5A5"/>
+864 <Button android:id="@+id/btnDiv" android:text="÷" android:backgroundTint="#FF9500"/>
+865
+866 <Button android:id="@+id/btn7" android:text="7"/>
+867 <Button android:id="@+id/btn8" android:text="8"/>
+868 <Button android:id="@+id/btn9" android:text="9"/>
+869 <Button android:id="@+id/btnMul" android:text="×" android:backgroundTint="#FF9500"/>
+870
+871 <Button android:id="@+id/btn4" android:text="4"/>
+872 <Button android:id="@+id/btn5" android:text="5"/>
+873 <Button android:id="@+id/btn6" android:text="6"/>
+874 <Button android:id="@+id/btnSub" android:text="−" android:backgroundTint="#FF9500"/>
+875
+876 <Button android:id="@+id/btn1" android:text="1"/>
+877 <Button android:id="@+id/btn2" android:text="2"/>
+878 <Button android:id="@+id/btn3" android:text="3"/>
+879 <Button android:id="@+id/btnAdd" android:text="+" android:backgroundTint="#FF9500"/>
+880
+881 <Button android:id="@+id/btn0" android:text="0"
+882 android:layout_columnSpan="2" android:layout_gravity="fill_horizontal"/>
+883 <Button android:id="@+id/btnDot" android:text="."/>
+884 <Button android:id="@+id/btnEquals" android:text="=" android:backgroundTint="#FF9500"/>
+885
+886 </GridLayout>
+887 </LinearLayout>
+888
+889 --- MainActivity.java ---
+890
+891 package com.example.calculator;
+892
+893 import android.os.Bundle;
+894 import android.widget.*;
+895 import androidx.appcompat.app.AppCompatActivity;
+896
+897 public class MainActivity extends AppCompatActivity {
+898
+899 TextView tvDisplay, tvExpression;
+900 double val1 = 0, val2 = 0;
+901 char operator;
+902 boolean newNumber = false;
+903
+904 @Override
+905 protected void onCreate(Bundle savedInstanceState) {
+906 super.onCreate(savedInstanceState);
+907 setContentView(R.layout.activity_main);
+908
+909 tvDisplay = findViewById(R.id.tvDisplay);
+910 tvExpression = findViewById(R.id.tvExpression);
+911
+912 int[] numIds = {R.id.btn0,R.id.btn1,R.id.btn2,R.id.btn3,R.id.btn4,
+913 R.id.btn5,R.id.btn6,R.id.btn7,R.id.btn8,R.id.btn9};
+914 for (int i = 0; i < numIds.length; i++) {
+915 final String num = String.valueOf(i);
+916 findViewById(numIds[i]).setOnClickListener(v -> appendNumber(num));
+917 }
+918
+919 findViewById(R.id.btnDot).setOnClickListener(v -> {
+920 String cur = tvDisplay.getText().toString();
+921 if (!cur.contains(".")) tvDisplay.setText(cur + ".");
+922 });
+923
+924 findViewById(R.id.btnAC).setOnClickListener(v -> {
+925 tvDisplay.setText("0"); tvExpression.setText(""); val1 = 0; newNumber = false;
+926 });
+927
+928 findViewById(R.id.btnPlusMinus).setOnClickListener(v -> {
+929 double d = Double.parseDouble(tvDisplay.getText().toString());
+930 tvDisplay.setText(format(-d));
+931 });
+932
+933 findViewById(R.id.btnPercent).setOnClickListener(v -> {
+934 double d = Double.parseDouble(tvDisplay.getText().toString());
+935 tvDisplay.setText(format(d / 100));
+936 });
+937
+938 setOperator(R.id.btnAdd, '+');
+939 setOperator(R.id.btnSub, '−');
+940 setOperator(R.id.btnMul, '×');
+941 setOperator(R.id.btnDiv, '÷');
+942
+943 findViewById(R.id.btnEquals).setOnClickListener(v -> {
+944 val2 = Double.parseDouble(tvDisplay.getText().toString());
+945 double result = 0;
+946 switch (operator) {
+947 case '+': result = val1 + val2; break;
+948 case '−': result = val1 - val2; break;
+949 case '×': result = val1 * val2; break;
+950 case '÷': result = val2 != 0 ? val1 / val2 : 0; break;
+951 }
+952 tvExpression.setText(format(val1) + " " + operator + " " + format(val2) + " =");
+953 tvDisplay.setText(format(result));
+954 newNumber = true;
+955 });
+956 }
+957
+958 void appendNumber(String n) {
+959 String cur = tvDisplay.getText().toString();
+960 if (newNumber || cur.equals("0")) { tvDisplay.setText(n); newNumber = false; }
+961 else tvDisplay.setText(cur + n);
+962 }
+963
+964 void setOperator(int id, char op) {
+965 findViewById(id).setOnClickListener(v -> {
+966 val1 = Double.parseDouble(tvDisplay.getText().toString());
+967 operator = op; newNumber = true;
+968 tvExpression.setText(format(val1) + " " + op);
+969 });
+970 }
+971
+972 String format(double d) {
+973 return d == (long) d ? String.valueOf((long) d) : String.valueOf(d);
+974 }
+975 }
+976
+977
+978 ================================================================
+979 8. ONLINE SHOPPING APP
+980 ================================================================
+981
+982 --- activity_main.xml ---
+983
+984 <?xml version="1.0" encoding="utf-8"?>
+985 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+986 android:layout_width="match_parent" android:layout_height="match_parent"
+987 android:orientation="vertical" android:padding="16dp">
+988
+989 <TextView android:text="Online Store" android:textSize="22sp"
+990 android:textStyle="bold" android:textColor="#1565C0"
+991 android:layout_width="wrap_content" android:layout_height="wrap_content"
+992 android:layout_marginBottom="12dp"/>
+993
+994 <EditText android:id="@+id/etSearch" android:hint="Search products..."
+995 android:layout_width="match_parent" android:layout_height="wrap_content"
+996 android:layout_marginBottom="8dp"/>
+997
+998 <ListView android:id="@+id/lvProducts"
+999 android:layout_width="match_parent" android:layout_height="0dp"
+1000 android:layout_weight="1"/>
+1001
+1002 <TextView android:id="@+id/tvTotal" android:text="Cart Total: ₹0"
+1003 android:textSize="16sp" android:textStyle="bold"
+1004 android:layout_width="wrap_content" android:layout_height="wrap_content"
+1005 android:layout_marginTop="8dp"/>
+1006
+1007 <Button android:id="@+id/btnCheckout" android:text="Checkout"
+1008 android:layout_width="match_parent" android:layout_height="wrap_content"
+1009 android:backgroundTint="#1565C0" android:layout_marginTop="8dp"/>
+1010
+1011 </LinearLayout>
+1012
+1013 --- MainActivity.java ---
+1014
+1015 package com.example.shopping;
+1016
+1017 import android.os.Bundle;
+1018 import android.widget.*;
+1019 import androidx.appcompat.app.AppCompatActivity;
+1020 import java.util.*;
+1021
+1022 public class MainActivity extends AppCompatActivity {
+1023
+1024 ListView lvProducts;
+1025 Button btnCheckout;
+1026 TextView tvTotal;
+1027 ArrayAdapter<String> adapter;
+1028 List<String> products = Arrays.asList(
+1029 "Smartphone - ₹14,999","Laptop Stand - ₹1,299",
+1030 "Headphones - ₹2,999","USB-C Hub - ₹899",
+1031 "Study Lamp - ₹749","Notebook Set - ₹299"
+1032 );
+1033 int[] prices = {14999, 1299, 2999, 899, 749, 299};
+1034 Set<Integer> cart = new HashSet<>();
+1035 int total = 0;
+1036
+1037 @Override
+1038 protected void onCreate(Bundle savedInstanceState) {
+1039 super.onCreate(savedInstanceState);
+1040 setContentView(R.layout.activity_main);
+1041
+1042 lvProducts = findViewById(R.id.lvProducts);
+1043 btnCheckout = findViewById(R.id.btnCheckout);
+1044 tvTotal = findViewById(R.id.tvTotal);
+1045
+1046 adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_multiple_choice, products);
+1047 lvProducts.setAdapter(adapter);
+1048 lvProducts.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+1049
+1050 lvProducts.setOnItemClickListener((parent, view, position, id) -> {
+1051 if (cart.contains(position)) { cart.remove(position); total -= prices[position]; }
+1052 else { cart.add(position); total += prices[position]; }
+1053 tvTotal.setText("Cart Total: ₹" + total);
+1054 });
+1055
+1056 btnCheckout.setOnClickListener(v -> {
+1057 if (cart.isEmpty()) { Toast.makeText(this, "Cart is empty", Toast.LENGTH_SHORT).show(); return; }
+1058 StringBuilder sb = new StringBuilder("Order placed!\n");
+1059 for (int i : cart) sb.append("• ").append(products.get(i)).append("\n");
+1060 sb.append("Total: ₹").append(total);
+1061 Toast.makeText(this, sb.toString(), Toast.LENGTH_LONG).show();
+1062 });
+1063 }
+1064 }
+1065
+1066
+1067 ================================================================
+1068 9. EMAIL + NOTIFICATIONS
+1069 ================================================================
+1070
+1071 --- activity_main.xml ---
+1072
+1073 <?xml version="1.0" encoding="utf-8"?>
+1074 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+1075 android:layout_width="match_parent" android:layout_height="match_parent"
+1076 android:orientation="vertical" android:padding="16dp">
+1077
+1078 <TextView android:text="Email Notifications"
+1079 android:textSize="22sp" android:textStyle="bold" android:textColor="#1565C0"
+1080 android:layout_width="wrap_content" android:layout_height="wrap_content"
+1081 android:layout_marginBottom="12dp"/>
+1082
+1083 <EditText android:id="@+id/etTo" android:hint="To (email)"
+1084 android:layout_width="match_parent" android:layout_height="wrap_content"
+1085 android:inputType="textEmailAddress" android:layout_marginBottom="8dp"/>
+1086
+1087 <EditText android:id="@+id/etSubject" android:hint="Subject"
+1088 android:layout_width="match_parent" android:layout_height="wrap_content"
+1089 android:layout_marginBottom="8dp"/>
+1090
+1091 <EditText android:id="@+id/etBody" android:hint="Message body..."
+1092 android:layout_width="match_parent" android:layout_height="wrap_content"
+1093 android:minLines="4" android:gravity="top" android:layout_marginBottom="12dp"/>
+1094
+1095 <Button android:id="@+id/btnSendEmail" android:text="Send Email"
+1096 android:layout_width="match_parent" android:layout_height="wrap_content"
+1097 android:backgroundTint="#1565C0" android:layout_marginBottom="8dp"/>
+1098
+1099 <Button android:id="@+id/btnNotify" android:text="Send Notification"
+1100 android:layout_width="match_parent" android:layout_height="wrap_content"
+1101 android:backgroundTint="#2E7D32"/>
+1102
+1103 </LinearLayout>
+1104
+1105 --- MainActivity.java ---
+1106
+1107 package com.example.emailnotif;
+1108
+1109 import android.app.*;
+1110 import android.content.Intent;
+1111 import android.os.Bundle;
+1112 import android.widget.*;
+1113 import androidx.appcompat.app.AppCompatActivity;
+1114 import androidx.core.app.NotificationCompat;
+1115 import androidx.core.app.NotificationManagerCompat;
+1116
+1117 public class MainActivity extends AppCompatActivity {
+1118
+1119 static final String CHANNEL_ID = "email_channel";
+1120 EditText etTo, etSubject, etBody;
+1121 Button btnSendEmail, btnNotify;
+1122
+1123 @Override
+1124 protected void onCreate(Bundle savedInstanceState) {
+1125 super.onCreate(savedInstanceState);
+1126 setContentView(R.layout.activity_main);
+1127
+1128 createNotificationChannel();
+1129
+1130 etTo = findViewById(R.id.etTo);
+1131 etSubject = findViewById(R.id.etSubject);
+1132 etBody = findViewById(R.id.etBody);
+1133 btnSendEmail = findViewById(R.id.btnSendEmail);
+1134 btnNotify = findViewById(R.id.btnNotify);
+1135
+1136 btnSendEmail.setOnClickListener(v -> {
+1137 String to = etTo.getText().toString().trim();
+1138 String subject = etSubject.getText().toString().trim();
+1139 String body = etBody.getText().toString().trim();
+1140 if (to.isEmpty() || subject.isEmpty()) {
+1141 Toast.makeText(this, "Fill recipient and subject", Toast.LENGTH_SHORT).show(); return;
+1142 }
+1143 Intent intent = new Intent(Intent.ACTION_SEND);
+1144 intent.setType("message/rfc822");
+1145 intent.putExtra(Intent.EXTRA_EMAIL, new String[]{to});
+1146 intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+1147 intent.putExtra(Intent.EXTRA_TEXT, body);
+1148 startActivity(Intent.createChooser(intent, "Choose Email App"));
+1149 });
+1150
+1151 btnNotify.setOnClickListener(v -> {
+1152 String subject = etSubject.getText().toString().trim();
+1153 if (subject.isEmpty()) { Toast.makeText(this,"Enter subject",Toast.LENGTH_SHORT).show(); return; }
+1154 NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+1155 .setSmallIcon(android.R.drawable.ic_dialog_email)
+1156 .setContentTitle("New Email: " + subject)
+1157 .setContentText(etBody.getText().toString())
+1158 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+1159 .setAutoCancel(true);
+1160 NotificationManagerCompat.from(this).notify(1, builder.build());
+1161 Toast.makeText(this, "Notification sent!", Toast.LENGTH_SHORT).show();
+1162 });
+1163 }
+1164
+1165 void createNotificationChannel() {
+1166 NotificationChannel channel = new NotificationChannel(
+1167 CHANNEL_ID, "Email Channel", NotificationManager.IMPORTANCE_DEFAULT);
+1168 getSystemService(NotificationManager.class).createNotificationChannel(channel);
+1169 }
+1170 }
+1171
+1172
+1173 ================================================================
+1174 10. MESSAGE + NOTIFICATIONS
+1175 ================================================================
+1176
+1177 --- activity_main.xml ---
+1178
+1179 <?xml version="1.0" encoding="utf-8"?>
+1180 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+1181 android:layout_width="match_parent" android:layout_height="match_parent"
+1182 android:orientation="vertical" android:padding="16dp">
+1183
+1184 <TextView android:text="Message Notifications"
+1185 android:textSize="22sp" android:textStyle="bold" android:textColor="#1565C0"
+1186 android:layout_width="wrap_content" android:layout_height="wrap_content"
+1187 android:layout_marginBottom="12dp"/>
+1188
+1189 <EditText android:id="@+id/etRecipient" android:hint="Recipient Name"
+1190 android:layout_width="match_parent" android:layout_height="wrap_content"
+1191 android:layout_marginBottom="8dp"/>
+1192
+1193 <EditText android:id="@+id/etMessage" android:hint="Type your message..."
+1194 android:layout_width="match_parent" android:layout_height="wrap_content"
+1195 android:minLines="3" android:gravity="top" android:layout_marginBottom="12dp"/>
+1196
+1197 <Button android:id="@+id/btnSendMsg" android:text="Send Message"
+1198 android:layout_width="match_parent" android:layout_height="wrap_content"
+1199 android:backgroundTint="#1565C0" android:layout_marginBottom="8dp"/>
+1200
+1201 <Button android:id="@+id/btnMsgNotify" android:text="Show Message Notification"
+1202 android:layout_width="match_parent" android:layout_height="wrap_content"
+1203 android:backgroundTint="#6A1B9A" android:layout_marginBottom="16dp"/>
+1204
+1205 <ListView android:id="@+id/lvMessages"
+1206 android:layout_width="match_parent" android:layout_height="0dp"
+1207 android:layout_weight="1"/>
+1208
+1209 </LinearLayout>
+1210
+1211 --- MainActivity.java ---
+1212
+1213 package com.example.msgnotif;
+1214
+1215 import android.app.*;
+1216 import android.os.Bundle;
+1217 import android.widget.*;
+1218 import androidx.appcompat.app.AppCompatActivity;
+1219 import androidx.core.app.NotificationCompat;
+1220 import androidx.core.app.NotificationManagerCompat;
+1221 import java.util.ArrayList;
+1222
+1223 public class MainActivity extends AppCompatActivity {
+1224
+1225 static final String CHANNEL_ID = "msg_channel";
+1226 EditText etRecipient, etMessage;
+1227 Button btnSendMsg, btnMsgNotify;
+1228 ListView lvMessages;
+1229 ArrayAdapter<String> adapter;
+1230 ArrayList<String> messages = new ArrayList<>();
+1231 int notifId = 100;
+1232
+1233 @Override
+1234 protected void onCreate(Bundle savedInstanceState) {
+1235 super.onCreate(savedInstanceState);
+1236 setContentView(R.layout.activity_main);
+1237 createNotificationChannel();
+1238
+1239 etRecipient = findViewById(R.id.etRecipient);
+1240 etMessage = findViewById(R.id.etMessage);
+1241 btnSendMsg = findViewById(R.id.btnSendMsg);
+1242 btnMsgNotify = findViewById(R.id.btnMsgNotify);
+1243 lvMessages = findViewById(R.id.lvMessages);
+1244
+1245 adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, messages);
+1246 lvMessages.setAdapter(adapter);
+1247
+1248 btnSendMsg.setOnClickListener(v -> {
+1249 String to = etRecipient.getText().toString().trim();
+1250 String msg = etMessage.getText().toString().trim();
+1251 if (to.isEmpty() || msg.isEmpty()) { Toast.makeText(this,"Fill all fields",Toast.LENGTH_SHORT).show(); return; }
+1252 messages.add("To " + to + ": " + msg);
+1253 adapter.notifyDataSetChanged();
+1254 etMessage.setText("");
+1255 Toast.makeText(this, "Message sent to " + to, Toast.LENGTH_SHORT).show();
+1256 });
+1257
+1258 btnMsgNotify.setOnClickListener(v -> {
+1259 String to = etRecipient.getText().toString().trim();
+1260 String msg = etMessage.getText().toString().trim();
+1261 if (to.isEmpty()) { Toast.makeText(this,"Enter recipient",Toast.LENGTH_SHORT).show(); return; }
+1262 NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+1263 .setSmallIcon(android.R.drawable.ic_dialog_info)
+1264 .setContentTitle("New message from " + to)
+1265 .setContentText(msg.isEmpty() ? "You have a new message" : msg)
+1266 .setPriority(NotificationCompat.PRIORITY_HIGH).setAutoCancel(true);
+1267 NotificationManagerCompat.from(this).notify(notifId++, builder.build());
+1268 });
+1269 }
+1270
+1271 void createNotificationChannel() {
+1272 NotificationChannel channel = new NotificationChannel(
+1273 CHANNEL_ID, "Messages", NotificationManager.IMPORTANCE_HIGH);
+1274 getSystemService(NotificationManager.class).createNotificationChannel(channel);
+1275 }
+1276 }
+1277
+1278
+1279 ================================================================
+1280 11. CHANGE BG COLOR, FONT STYLE, SIZE ON BUTTON CLICK
+1281 ================================================================
+1282
+1283 --- activity_main.xml ---
+1284
+1285 <?xml version="1.0" encoding="utf-8"?>
+1286 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+1287 android:layout_width="match_parent" android:layout_height="match_parent">
+1288
+1289 <LinearLayout android:id="@+id/mainLayout"
+1290 android:layout_width="match_parent" android:layout_height="wrap_content"
+1291 android:orientation="vertical" android:padding="16dp">
+1292
+1293 <TextView android:text="Style Changer" android:textSize="22sp"
+1294 android:textStyle="bold" android:textColor="#1565C0"
+1295 android:layout_width="wrap_content" android:layout_height="wrap_content"
+1296 android:layout_marginBottom="12dp"/>
+1297
+1298 <TextView android:id="@+id/tvSample"
+1299 android:text="This is sample text. Press the buttons below to change style!"
+1300 android:textSize="18sp" android:padding="16dp"
+1301 android:layout_width="match_parent" android:layout_height="wrap_content"
+1302 android:layout_marginBottom="16dp"/>
+1303
+1304 <TextView android:text="Background Color" android:textStyle="bold"
+1305 android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+1306 <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+1307 android:orientation="horizontal" android:layout_marginBottom="12dp">
+1308 <Button android:id="@+id/btnBgWhite" android:text="White"
+1309 android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"/>
+1310 <Button android:id="@+id/btnBgBlue" android:text="Blue"
+1311 android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"/>
+1312 <Button android:id="@+id/btnBgGreen" android:text="Green"
+1313 android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"/>
+1314 <Button android:id="@+id/btnBgYellow" android:text="Yellow"
+1315 android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"/>
+1316 </LinearLayout>
+1317
+1318 <TextView android:text="Font Style" android:textStyle="bold"
+1319 android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+1320 <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+1321 android:orientation="horizontal" android:layout_marginBottom="12dp">
+1322 <Button android:id="@+id/btnNormal" android:text="Normal"
+1323 android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"/>
+1324 <Button android:id="@+id/btnBold" android:text="Bold"
+1325 android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"/>
+1326 <Button android:id="@+id/btnItalic" android:text="Italic"
+1327 android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"/>
+1328 </LinearLayout>
+1329
+1330 <TextView android:text="Font Size" android:textStyle="bold"
+1331 android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+1332 <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+1333 android:orientation="horizontal" android:layout_marginBottom="12dp">
+1334 <Button android:id="@+id/btnSmall" android:text="Small"
+1335 android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"/>
+1336 <Button android:id="@+id/btnMedium" android:text="Medium"
+1337 android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"/>
+1338 <Button android:id="@+id/btnLarge" android:text="Large"
+1339 android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"/>
+1340 </LinearLayout>
+1341
+1342 </LinearLayout>
+1343 </ScrollView>
+1344
+1345 --- MainActivity.java ---
+1346
+1347 package com.example.stylechanger;
+1348
+1349 import android.graphics.Color;
+1350 import android.graphics.Typeface;
+1351 import android.os.Bundle;
+1352 import android.widget.*;
+1353 import androidx.appcompat.app.AppCompatActivity;
+1354
+1355 public class MainActivity extends AppCompatActivity {
+1356
+1357 TextView tvSample;
+1358 LinearLayout mainLayout;
+1359
+1360 @Override
+1361 protected void onCreate(Bundle savedInstanceState) {
+1362 super.onCreate(savedInstanceState);
+1363 setContentView(R.layout.activity_main);
+1364
+1365 tvSample = findViewById(R.id.tvSample);
+1366 mainLayout = findViewById(R.id.mainLayout);
+1367
+1368 // Background colors
+1369 findViewById(R.id.btnBgWhite).setOnClickListener(v -> mainLayout.setBackgroundColor(Color.WHITE));
+1370 findViewById(R.id.btnBgBlue).setOnClickListener(v -> mainLayout.setBackgroundColor(Color.parseColor("#E3F2FD")));
+1371 findViewById(R.id.btnBgGreen).setOnClickListener(v -> mainLayout.setBackgroundColor(Color.parseColor("#E8F5E9")));
+1372 findViewById(R.id.btnBgYellow).setOnClickListener(v -> mainLayout.setBackgroundColor(Color.parseColor("#FFFDE7")));
+1373
+1374 // Font styles
+1375 findViewById(R.id.btnNormal).setOnClickListener(v -> tvSample.setTypeface(null, Typeface.NORMAL));
+1376 findViewById(R.id.btnBold).setOnClickListener(v -> tvSample.setTypeface(null, Typeface.BOLD));
+1377 findViewById(R.id.btnItalic).setOnClickListener(v -> tvSample.setTypeface(null, Typeface.ITALIC));
+1378
+1379 // Font sizes
+1380 findViewById(R.id.btnSmall).setOnClickListener(v -> tvSample.setTextSize(12f));
+1381 findViewById(R.id.btnMedium).setOnClickListener(v -> tvSample.setTextSize(18f));
+1382 findViewById(R.id.btnLarge).setOnClickListener(v -> tvSample.setTextSize(26f));
+1383 }
+1384 }
+1385
+1386
+1387 ================================================================
+1388 12. LOGIN WITH NAME, PASSWORD, RESET & SUBMIT (Header Image + Label)
+1389 ================================================================
+1390
+1391 --- activity_main.xml ---
+1392
+1393 <?xml version="1.0" encoding="utf-8"?>
+1394 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+1395 android:layout_width="match_parent" android:layout_height="match_parent"
+1396 android:orientation="vertical">
+1397
+1398 <!-- Header Image Banner -->
+1399 <ImageView android:id="@+id/ivHeader"
+1400 android:layout_width="match_parent" android:layout_height="180dp"
+1401 android:scaleType="centerCrop"
+1402 android:background="#1565C0"
+1403 android:src="@drawable/ic_launcher_foreground"
+1404 android:contentDescription="Header"/>
+1405
+1406 <LinearLayout android:layout_width="match_parent"
+1407 android:layout_height="match_parent"
+1408 android:orientation="vertical" android:padding="24dp"
+1409 android:gravity="center_horizontal">
+1410
+1411 <TextView android:text="Student Portal Login"
+1412 android:textSize="24sp" android:textStyle="bold"
+1413 android:textColor="#1565C0" android:layout_marginBottom="6dp"
+1414 android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+1415
+1416 <TextView android:text="Sign in to continue"
+1417 android:textSize="14sp" android:textColor="#757575"
+1418 android:layout_marginBottom="24dp"
+1419 android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+1420
+1421 <EditText android:id="@+id/etUsername"
+1422 android:hint="Username / Student ID"
+1423 android:layout_width="match_parent" android:layout_height="wrap_content"
+1424 android:inputType="textPersonName"
+1425 android:drawableStart="@android:drawable/ic_menu_myplaces"
+1426 android:layout_marginBottom="12dp"/>
+1427
+1428 <EditText android:id="@+id/etPassword"
+1429 android:hint="Password"
+1430 android:layout_width="match_parent" android:layout_height="wrap_content"
+1431 android:inputType="textPassword"
+1432 android:drawableStart="@android:drawable/ic_lock_lock"
+1433 android:layout_marginBottom="24dp"/>
+1434
+1435 <Button android:id="@+id/btnSubmit"
+1436 android:text="Submit / Login"
+1437 android:layout_width="match_parent" android:layout_height="wrap_content"
+1438 android:backgroundTint="#1565C0" android:layout_marginBottom="8dp"/>
+1439
+1440 <Button android:id="@+id/btnReset"
+1441 android:text="Reset"
+1442 android:layout_width="match_parent" android:layout_height="wrap_content"
+1443 android:backgroundTint="#C62828"/>
+1444
+1445 <TextView android:id="@+id/tvMessage" android:layout_width="wrap_content"
+1446 android:layout_height="wrap_content" android:layout_marginTop="16dp"
+1447 android:textSize="14sp"/>
+1448
+1449 </LinearLayout>
+1450 </LinearLayout>
+1451
+1452 --- MainActivity.java ---
+1453
+1454 package com.example.login;
+1455
+1456 import android.os.Bundle;
+1457 import android.widget.*;
+1458 import androidx.appcompat.app.AppCompatActivity;
+1459
+1460 public class MainActivity extends AppCompatActivity {
+1461
+1462 EditText etUsername, etPassword;
+1463 Button btnSubmit, btnReset;
+1464 TextView tvMessage;
+1465
+1466 @Override
+1467 protected void onCreate(Bundle savedInstanceState) {
+1468 super.onCreate(savedInstanceState);
+1469 setContentView(R.layout.activity_main);
+1470
+1471 etUsername = findViewById(R.id.etUsername);
+1472 etPassword = findViewById(R.id.etPassword);
+1473 btnSubmit = findViewById(R.id.btnSubmit);
+1474 btnReset = findViewById(R.id.btnReset);
+1475 tvMessage = findViewById(R.id.tvMessage);
+1476
+1477 btnSubmit.setOnClickListener(v -> {
+1478 String user = etUsername.getText().toString().trim();
+1479 String pass = etPassword.getText().toString().trim();
+1480 if (user.isEmpty() || pass.isEmpty()) {
+1481 tvMessage.setText("Please fill all fields.");
+1482 tvMessage.setTextColor(0xFFC62828);
+1483 } else if (user.equals("admin") && pass.equals("1234")) {
+1484 tvMessage.setText("Login successful! Welcome, " + user);
+1485 tvMessage.setTextColor(0xFF2E7D32);
+1486 } else {
+1487 tvMessage.setText("Invalid credentials. Try admin/1234");
+1488 tvMessage.setTextColor(0xFFC62828);
+1489 }
+1490 });
+1491
+1492 btnReset.setOnClickListener(v -> {
+1493 etUsername.setText("");
+1494 etPassword.setText("");
+1495 tvMessage.setText("");
+1496 });
+1497 }
+1498 }
+1499
+1500
+1501 ================================================================
+1502 13. LAYOUT MANAGERS DEMO
+1503 ================================================================
+1504
+1505 --- activity_main.xml ---
+1506
+1507 <?xml version="1.0" encoding="utf-8"?>
+1508 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+1509 android:layout_width="match_parent" android:layout_height="match_parent"
+1510 android:padding="16dp">
+1511
+1512 <LinearLayout android:layout_width="match_parent"
+1513 android:layout_height="wrap_content" android:orientation="vertical">
+1514
+1515 <TextView android:text="Layout Managers Demo"
+1516 android:textSize="22sp" android:textStyle="bold" android:textColor="#1565C0"
+1517 android:layout_width="wrap_content" android:layout_height="wrap_content"
+1518 android:layout_marginBottom="16dp"/>
+1519
+1520 <!-- LinearLayout Vertical -->
+1521 <TextView android:text="1. LinearLayout (Vertical)"
+1522 android:textStyle="bold" android:layout_width="wrap_content"
+1523 android:layout_height="wrap_content" android:layout_marginBottom="4dp"/>
+1524 <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+1525 android:orientation="vertical" android:background="#E3F2FD"
+1526 android:padding="8dp" android:layout_marginBottom="12dp">
+1527 <Button android:text="View 1" android:backgroundTint="#1565C0" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+1528 <Button android:text="View 2" android:backgroundTint="#1976D2" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="6dp"/>
+1529 <Button android:text="View 3" android:backgroundTint="#1E88E5" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="6dp"/>
+1530 </LinearLayout>
+1531
+1532 <!-- LinearLayout Horizontal -->
+1533 <TextView android:text="2. LinearLayout (Horizontal)"
+1534 android:textStyle="bold" android:layout_width="wrap_content"
+1535 android:layout_height="wrap_content" android:layout_marginBottom="4dp"/>
+1536 <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+1537 android:orientation="horizontal" android:background="#E8F5E9"
+1538 android:padding="8dp" android:layout_marginBottom="12dp">
+1539 <Button android:text="A" android:backgroundTint="#1565C0"
+1540 android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"/>
+1541 <Button android:text="B" android:backgroundTint="#1976D2"
+1542 android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginStart="6dp"/>
+1543 <Button android:text="C" android:backgroundTint="#1E88E5"
+1544 android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginStart="6dp"/>
+1545 </LinearLayout>
+1546
+1547 <!-- GridLayout -->
+1548 <TextView android:text="3. GridLayout (2x2)"
+1549 android:textStyle="bold" android:layout_width="wrap_content"
+1550 android:layout_height="wrap_content" android:layout_marginBottom="4dp"/>
+1551 <GridLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+1552 android:columnCount="2" android:background="#FFF3E0"
+1553 android:padding="8dp" android:layout_marginBottom="12dp" android:useDefaultMargins="true">
+1554 <Button android:text="Grid 1" android:backgroundTint="#0D47A1"/>
+1555 <Button android:text="Grid 2" android:backgroundTint="#1565C0"/>
+1556 <Button android:text="Grid 3" android:backgroundTint="#1976D2"/>
+1557 <Button android:text="Grid 4" android:backgroundTint="#1E88E5"/>
+1558 </GridLayout>
+1559
+1560 <!-- RelativeLayout -->
+1561 <TextView android:text="4. RelativeLayout"
+1562 android:textStyle="bold" android:layout_width="wrap_content"
+1563 android:layout_height="wrap_content" android:layout_marginBottom="4dp"/>
+1564 <RelativeLayout android:layout_width="match_parent" android:layout_height="100dp"
+1565 android:background="#F3E5F5" android:padding="8dp" android:layout_marginBottom="12dp">
+1566 <Button android:id="@+id/btnTopLeft" android:text="Top Left"
+1567 android:backgroundTint="#1565C0"
+1568 android:layout_alignParentTop="true" android:layout_alignParentStart="true"
+1569 android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+1570 <Button android:text="Top Right" android:backgroundTint="#C62828"
+1571 android:layout_alignParentTop="true" android:layout_alignParentEnd="true"
+1572 android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+1573 <Button android:text="Center" android:backgroundTint="#2E7D32"
+1574 android:layout_centerInParent="true"
+1575 android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+1576 </RelativeLayout>
+1577
+1578 <!-- TableLayout -->
+1579 <TextView android:text="5. TableLayout"
+1580 android:textStyle="bold" android:layout_width="wrap_content"
+1581 android:layout_height="wrap_content" android:layout_marginBottom="4dp"/>
+1582 <TableLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+1583 android:background="#E8F5E9" android:padding="8dp" android:layout_marginBottom="12dp"
+1584 android:stretchColumns="*">
+1585 <TableRow>
+1586 <TextView android:text="Name" android:textStyle="bold" android:padding="8dp"/>
+1587 <TextView android:text="Marks" android:textStyle="bold" android:padding="8dp"/>
+1588 <TextView android:text="Grade" android:textStyle="bold" android:padding="8dp"/>
+1589 </TableRow>
+1590 <TableRow>
+1591 <TextView android:text="Alice" android:padding="8dp"/>
+1592 <TextView android:text="92" android:padding="8dp"/>
+1593 <TextView android:text="A+" android:padding="8dp"/>
+1594 </TableRow>
+1595 <TableRow>
+1596 <TextView android:text="Bob" android:padding="8dp"/>
+1597 <TextView android:text="78" android:padding="8dp"/>
+1598 <TextView android:text="B" android:padding="8dp"/>
+1599 </TableRow>
+1600 </TableLayout>
+1601
+1602 <!-- FrameLayout -->
+1603 <TextView android:text="6. FrameLayout (Overlay)"
+1604 android:textStyle="bold" android:layout_width="wrap_content"
+1605 android:layout_height="wrap_content" android:layout_marginBottom="4dp"/>
+1606 <FrameLayout android:layout_width="match_parent" android:layout_height="80dp"
+1607 android:background="#FFEBEE">
+1608 <TextView android:text="Background Layer"
+1609 android:layout_gravity="center" android:textSize="16sp"
+1610 android:textColor="#C62828"
+1611 android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+1612 <TextView android:text="Overlay Layer (FrameLayout)"
+1613 android:layout_gravity="bottom|end" android:textSize="11sp"
+1614 android:textColor="#757575" android:padding="6dp"
+1615 android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+1616 </FrameLayout>
+1617
+1618 </LinearLayout>
+1619 </ScrollView>
+1620
+1621 --- MainActivity.java ---
+1622
+1623 package com.example.layouts;
+1624
+1625 import android.os.Bundle;
+1626 import android.widget.Toast;
+1627 import androidx.appcompat.app.AppCompatActivity;
+1628
+1629 public class MainActivity extends AppCompatActivity {
+1630 @Override
+1631 protected void onCreate(Bundle savedInstanceState) {
+1632 super.onCreate(savedInstanceState);
+1633 setContentView(R.layout.activity_main);
+1634 Toast.makeText(this, "Layout Managers Demo loaded!", Toast.LENGTH_SHORT).show();
+1635 }
+1636 }
+1637
+1638 ================================================================
+1639 END OF ALL PROGRAMS
+1640 ================================================================
+1641 TIPS FOR ANDROID STUDIO:
+1642 - Create a new project for each app: File > New > New Project > Empty Activity
+1643 - Change the package name to match each program (e.g. com.example.bookstore)
+1644 - For SQLite apps, create DatabaseHelper.java as a separate class file
+1645 - For Notifications, add this to AndroidManifest.xml inside <uses-permission>:
+1646 <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+1647 - Minimum SDK: API 26 (Android 8.0) recommended
+1648 - Always run on emulator or physical device with USB debugging enabled
+1649 ================================================================
