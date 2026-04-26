@@ -1,50 +1,28 @@
-# Welcome to your Expo app 👋
+# BMI Calculator
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Exercise 8: Cross-platform BMI calculator using React Native and Expo.
 
-## Get started
+## Prerequisites
 
-1. Install dependencies
+- Node.js installed
+- Expo CLI support through `npx`
+
+## Start in the Browser
+
+1. Open a terminal in the `BMICalculator` folder.
+2. Install dependencies if needed:
 
    ```bash
    npm install
    ```
 
-2. Start the app
+3. Start Expo for web:
 
    ```bash
-   npx expo start
+   npx expo start --web
    ```
 
-In the output, you'll find options to open the app in a
+## Notes
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- You can also start with `npx expo start` and then choose the web option in the Expo launcher.
+- The app can still be opened on Android or iOS through Expo if you want mobile preview later.
