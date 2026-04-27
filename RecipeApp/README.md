@@ -13,6 +13,7 @@ Exercise 7: Recipe suggester with nutrition information using Ionic and Angular.
 2. Install dependencies if needed:
 
    ```bash
+   npm install -g @ionic/cli
    npm install
    ```
 
