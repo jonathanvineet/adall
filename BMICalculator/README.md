@@ -13,6 +13,7 @@ Exercise 8: Cross-platform BMI calculator using React Native and Expo.
 2. Install dependencies if needed:
 
    ```bash
+   npm install -g expo-cli
    npm install
    ```
 
