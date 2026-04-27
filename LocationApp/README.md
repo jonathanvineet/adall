@@ -13,6 +13,7 @@ Exercise 6: Current location app using Apache Cordova and the geolocation plugin
 2. Install dependencies if needed:
 
    ```bash
+   npm install -g cordova
    npm install
    ```
 
